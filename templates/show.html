@@ -1,0 +1,15 @@
+{% block body %}
+<ul>
+    {% for card in data %}
+    <li>
+        Term: {% print(card['term']) %}
+    </li>
+    <ul>
+        <li>
+            Definition: {% print(card['definition']) %}
+        </li>
+    </ul>
+    {% endfor %}
+</ul>
+<a href="/flashcards/new">Create a new flashcard</a>
+{% endblock %}

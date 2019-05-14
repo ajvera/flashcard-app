@@ -9,15 +9,46 @@ from pprint import pprint
 
 app = Flask(__name__)
 
+#Homepage will eventually direct users to their preffered learning style
 @app.route("/")
 def index():
+    return render_template('index.html')
+
+#Flashcard review page
+@app.route("/flashcards")
+def get():
+    query = session.query(Flashcard).all()
+    data = []
+    for obj in query:
+        data.append({'term': obj.term, 'definition': obj.definition}) 
+    return render_template('show.html', data=data)
+
+#Create new flashcard
+@app.route("/flashcards/new", methods=["GET", "POST"])
+def new():
+    if request.method == "POST":
+        flashcard = Flashcard(term=request.form['term'], definition=request.form['definition'])
+        session.add(flashcard)
+        session.commit()
+        return redirect('/flashcards')
+    
+    return render_template('new.html')
+
+@app.route("/flashcards/update")
+def update():
     query = session.query(Flashcard).all()
     data = []
     for obj in query:
         data.append({'term': obj.term, 'definition': obj.definition}) 
     return render_template('index.html', data=data)
 
-    return 'hello'
+@app.route("/flashcards/delete")
+def delete():
+    query = session.query(Flashcard).all()
+    data = []
+    for obj in query:
+        data.append({'term': obj.term, 'definition': obj.definition}) 
+    return render_template('index.html', data=data)
 
 if __name__ == "__main__":
     app.debug = True
