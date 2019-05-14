@@ -1,0 +1,14 @@
+{% block body %}
+<ul>
+    {% for card in data %}
+    <li>
+        Term: {% print(card['term']) %}
+    </li>
+    <ul>
+        <li>
+            Completed: {% print(card['definition']) %}
+        </li>
+    </ul>
+    {% endfor %}
+</ul>
+{% endblock %}
