@@ -1,5 +1,6 @@
+<!-- <link rel="stylesheet" href="/static/styles/card.css" type="text/css"> -->
 {% block body %}
-<ul>
+<!-- <ul>
     {% for card in data %}
     <li>
         Term: {% print(card['term']) %}
@@ -10,6 +11,22 @@
         </li>
     </ul>
     {% endfor %}
-</ul>
+</ul> -->
+{% for card in data %}
+    <article class="flashcard">
+        <input type="checkbox" />
+        <label for="flashcard">
+            <section class="front">
+                {% print(card['term']) %}
+            </section>
+            
+            <section class="back">
+                {% print(card['definition']) %}
+            </section>
+        </label>
+    </article>
+    <a href="/flashcards/update/{% print(card['id']) %}">Update</a>
+    <br><br>
+{% endfor %}
 <a href="/flashcards/new">Create a new flashcard</a>
 {% endblock %}

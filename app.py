@@ -12,6 +12,7 @@ app = Flask(__name__)
 #Homepage will eventually direct users to their preffered learning style
 @app.route("/")
 def index():
+    session.rollback()
     return render_template('index.html')
 
 #Flashcard review page
@@ -20,7 +21,7 @@ def get():
     query = session.query(Flashcard).all()
     data = []
     for obj in query:
-        data.append({'term': obj.term, 'definition': obj.definition}) 
+        data.append({'id': obj.flashcardID, 'term': obj.term, 'definition': obj.definition})
     return render_template('show.html', data=data)
 
 #Create new flashcard
@@ -34,13 +35,19 @@ def new():
     
     return render_template('new.html')
 
-@app.route("/flashcards/update")
-def update():
-    query = session.query(Flashcard).all()
-    data = []
-    for obj in query:
-        data.append({'term': obj.term, 'definition': obj.definition}) 
-    return render_template('index.html', data=data)
+#Update an existing flashcard
+@app.route("/flashcards/update/<id>", methods=["GET","POST"])
+def update(id):
+    flashcard = session.query(Flashcard).get(id)
+    print(Flashcard)
+    
+    
+    if request.method == "POST":
+        session.query(Flashcard).filter(id).update(term=request.form["term"], definition=request.form['definition'])
+        session.commit()
+        return redirect('show.html')
+
+    return render_template('update.html', flashcard=flashcard)
 
 @app.route("/flashcards/delete")
 def delete():
