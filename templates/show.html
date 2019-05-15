@@ -25,7 +25,8 @@
             </section>
         </label>
     </article>
-    <a href="/flashcards/update/{% print(card['id']) %}">Update</a>
+    <a href="/flashcards/update/{% print(card['flashcardID']) %}">Update</a>
+    <a href="/flashcards/delete/{% print(card['flashcardID']) %}">Delete</a>
     <br><br>
 {% endfor %}
 <a href="/flashcards/new">Create a new flashcard</a>
