@@ -9,7 +9,12 @@
     color: #ba1f53;
 }
 
-a#study {
+span {
+    display: block
+}
+
+a.study {
     color:#ddd;
     font-size: 125px;
+    padding: 50px;
 }

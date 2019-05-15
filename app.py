@@ -14,8 +14,9 @@ def index():
     return render_template('index.html')
 
 # Flashcard review page
-@app.route("/flashcards")
-def get():
+@app.route("/flashcards", defaults={'style': None})
+@app.route("/flashcards/<style>")
+def get(style):
     flashcards = Flashcard.query.all()
     print(flashcards)
     if len(flashcards) < 1:
@@ -30,7 +31,7 @@ def new():
             flashcard = Flashcard(term=request.form['term'], definition=request.form['definition'])
             db.session.add(flashcard)
             db.session.commit()
-            return redirect('/flashcards')
+            return redirect('/')
         except Exception as e:
             print("Failed to make a new flashcard, try again!")
             print(e)
