@@ -1,0 +1,10 @@
+{% block body %}
+    <form action="/flashcards/update/{% print(flashcard['flashcardID']) %}" method="POST">
+        <label for="term">Term</label>
+        <input type="text" value="{% print(flashcard['term']) %}" name="term">
+        <label for="definition">Definition</label>
+        <input type="text" value="{% print(flashcard['definition']) %}" name="definition">
+        <input type="submit" value="update">
+    </form>
+
+{% endblock %}

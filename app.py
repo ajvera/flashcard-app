@@ -7,17 +7,52 @@ from tabledef import *
 import json
 from pprint import pprint
 
-app = Flask(__name__)
-
+#Homepage will eventually direct users to their preffered learning style
 @app.route("/")
 def index():
-    query = session.query(Flashcard).all()
-    data = []
-    for obj in query:
-        data.append({'term': obj.term, 'definition': obj.definition}) 
-    return render_template('index.html', data=data)
+    return render_template('index.html')
 
-    return 'hello'
+#Flashcard review page
+@app.route("/flashcards")
+def get():
+    # query = session.query(Flashcard).all()
+    # data = []
+    # for obj in query:
+    #     data.append({'id': obj.flashcardID, 'term': obj.term, 'definition': obj.definition})
+    flashcards = Flashcard.query.all()
+    return render_template('show.html', data=flashcards)
+
+#Create new flashcard
+@app.route("/flashcards/new", methods=["GET", "POST"])
+def new():
+    if request.method == "POST":
+        flashcard = Flashcard(term=request.form['term'], definition=request.form['definition'])
+        db.session.add(flashcard)
+        db.session.commit()
+        return redirect('/flashcards')
+    
+    return render_template('new.html')
+
+#Update an existing flashcard
+@app.route("/flashcards/update/<id>", methods=["GET","POST"])
+def update(id):
+    flashcard = Flashcard.query.get(id)
+
+    if request.method == "POST":
+        flashcard.term = request.form.get('term')
+        flashcard.definition = request.form.get('definition')
+        db.session.commit()
+        return redirect('/flashcards')
+
+    return render_template('update.html', flashcard=flashcard)
+
+#Deletes Flashcard
+@app.route("/flashcards/delete/<id>")
+def delete(id):
+    flashcard = Flashcard.query.get(id)
+    db.session.delete(flashcard)
+    db.session.commit()
+    return redirect("/flashcards")
 
 if __name__ == "__main__":
     app.debug = True
