@@ -1,9 +1,20 @@
-<h1>Create a new flashcard</h1>
-<form action="/flashcards/new" method="post">
-    <label for="term">Term</label>
-    <input type="text" placeholder="Enter the term for review" name="term">
-    <label for="definition">Definition</label>
-    <input type="text" placeholder="Enter the term definition" name="definition">
-    <input type="submit" value="create">
-</form>
-<a href="/flashcards">Review</a>
+{% extends "layout.html" %}
+{% block title %}New{% endblock %}
+{% block head %}
+    {{super() }}
+    <link rel="stylesheet" href="/static/styles/new_and_update.css" type="text/css">
+{% endblock %}
+{% block content %}
+<div class="structure">
+    <h1>New Flashcard</h1>
+    <form action="/flashcards/new" method="post" autocomplete="off">
+        <section class="term">
+            <textarea type="text" placeholder="Term" name="term"></textarea>
+        </section>
+        <section class="definition">
+            <textarea type="text" placeholder="Definition" name="definition"></textarea>
+        </section>
+        <input class="submit" type="submit" value="create">
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,15 @@
+.welcome-mat {
+    text-align: center;
+    margin: 0px auto;
+    display: block;
+    font: 30px "Oswald", sans-serif;
+    text-align: center;
+    line-height: 200px;
+    width: 100%;
+    color: #ba1f53;
+}
+
+a#study {
+    color:#ddd;
+    font-size: 125px;
+}

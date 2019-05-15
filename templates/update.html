@@ -1,10 +1,20 @@
-{% block body %}
+{% extends "layout.html" %}
+{% block title %}Update{% endblock %}
+{% block head %}
+    {{super() }}
+    <link rel="stylesheet" href="/static/styles/new_and_update.css" type="text/css">
+{% endblock %}
+{% block content %}
+<div class="structure">
+    <h1>Update</h1>  
     <form action="/flashcards/update/{% print(flashcard['flashcardID']) %}" method="POST">
-        <label for="term">Term</label>
-        <input type="text" value="{% print(flashcard['term']) %}" name="term">
-        <label for="definition">Definition</label>
-        <input type="text" value="{% print(flashcard['definition']) %}" name="definition">
-        <input type="submit" value="update">
+        <section class="term">
+            <textarea type="text" name="term">{% print(flashcard['term']) %}</textarea>
+        </section>
+        <section class="definition">
+           <textarea type="text" name="definition">{% print(flashcard['definition']) %}</textarea>
+        </section>
+        <input class="submit" type="submit" value="update">
     </form>
-
+</div>
 {% endblock %}

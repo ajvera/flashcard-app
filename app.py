@@ -7,7 +7,8 @@ from tabledef import *
 import json
 from pprint import pprint
 
-#Homepage will eventually direct users to their preffered learning style
+#Homepage 
+# TODO should eventually direct users to their preffered learning style
 @app.route("/")
 def index():
     return render_template('index.html')

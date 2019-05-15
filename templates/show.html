@@ -1,33 +1,28 @@
-<!-- <link rel="stylesheet" href="/static/styles/card.css" type="text/css"> -->
-{% block body %}
-<!-- <ul>
+{% extends "layout.html" %}
+{% block title %}Show{% endblock %}
+{% block head %}
+{{ super() }}
+    <link rel="stylesheet" href="/static/styles/show.css" type="text/css">
+{% endblock %}
+{% block content %}
     {% for card in data %}
-    <li>
-        Term: {% print(card['term']) %}
-    </li>
-    <ul>
-        <li>
-            Definition: {% print(card['definition']) %}
-        </li>
-    </ul>
-    {% endfor %}
-</ul> -->
-{% for card in data %}
-    <article class="flashcard">
-        <input type="checkbox" />
-        <label for="flashcard">
-            <section class="front">
-                {% print(card['term']) %}
-            </section>
+        <article class="flashcard">
+            <input id="flashcard-{% print(card['flashcardID']) %}" type="checkbox" />
+            <label for="flashcard-{% print(card['flashcardID']) %}">
+                <section class="front">
+                    {% print(card['term']) %}
+                </section>
+                
+                <section class="back">
+                    {% print(card['definition']) %}
+                </section>
+            </label>
             
-            <section class="back">
-                {% print(card['definition']) %}
-            </section>
-        </label>
-    </article>
-    <a href="/flashcards/update/{% print(card['flashcardID']) %}">Update</a>
-    <a href="/flashcards/delete/{% print(card['flashcardID']) %}">Delete</a>
-    <br><br>
-{% endfor %}
-<a href="/flashcards/new">Create a new flashcard</a>
+            <a class="nostyle" id="update" href="/flashcards/update/{% print(card['flashcardID']) %}"><i class="far fa-edit"></i></a>
+            <a class="nostyle" id="delete" href="/flashcards/delete/{% print(card['flashcardID']) %}"><i class="far fa-trash-alt"></i></a>
+        </article>
+        <br><br>
+    {% endfor %}
+    <a class="nostyle" id="new" href="/flashcards/new"><i class="far fa-plus-square"></i></a>
+
 {% endblock %}
