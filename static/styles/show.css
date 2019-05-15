@@ -1,7 +1,8 @@
 article.flashcard {
   margin: 0px auto;
   border: 1px rgba(255, 255, 255, 0.03) solid;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+          box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
   width: 100%;
   max-width: 600px;
   height: 100%;
@@ -28,6 +29,8 @@ article.flashcard section {
   text-align: center;
   line-height: 400px;
   width: 100%;
+  -webkit-transition: all 0.2s linear 0s;
+  -o-transition: all 0.2s linear 0s;
   transition: all 0.2s linear 0s;
   overflow: hidden;
 }
@@ -62,5 +65,6 @@ a#new {
   padding: 15px;
   border-radius: 100%;
   border: 1px rgba(255, 255, 255, 0.03) solid;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+          box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 }
