@@ -31,7 +31,7 @@ def new():
             flashcard = Flashcard(term=request.form['term'], definition=request.form['definition'])
             db.session.add(flashcard)
             db.session.commit()
-            return redirect('/flashcards')
+            return redirect('/')
         except Exception as e:
             print("Failed to make a new flashcard, try again!")
             print(e)
