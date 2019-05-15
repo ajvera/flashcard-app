@@ -16,21 +16,24 @@ def index():
 #Flashcard review page
 @app.route("/flashcards")
 def get():
-    # query = session.query(Flashcard).all()
-    # data = []
-    # for obj in query:
-    #     data.append({'id': obj.flashcardID, 'term': obj.term, 'definition': obj.definition})
     flashcards = Flashcard.query.all()
+    print(flashcards)
+    if len(flashcards) < 1:
+        flashcards = [Flashcard(term="Click me!", definition="There aren't any flashcards yet. Making some!")]
     return render_template('show.html', data=flashcards)
 
 #Create new flashcard
 @app.route("/flashcards/new", methods=["GET", "POST"])
 def new():
     if request.method == "POST":
-        flashcard = Flashcard(term=request.form['term'], definition=request.form['definition'])
-        db.session.add(flashcard)
-        db.session.commit()
-        return redirect('/flashcards')
+        try:
+            flashcard = Flashcard(term=request.form['term'], definition=request.form['definition'])
+            db.session.add(flashcard)
+            db.session.commit()
+            return redirect('/flashcards')
+        except Exception as e:
+            print("Failed to make a new flashcard, try again!")
+            print(e)
     
     return render_template('new.html')
 
@@ -40,20 +43,28 @@ def update(id):
     flashcard = Flashcard.query.get(id)
 
     if request.method == "POST":
-        flashcard.term = request.form.get('term')
-        flashcard.definition = request.form.get('definition')
-        db.session.commit()
-        return redirect('/flashcards')
+        try:
+            flashcard.term = request.form.get('term')
+            flashcard.definition = request.form.get('definition')
+            db.session.commit()
+            return redirect('/flashcards')
+        except Exception as e:
+            print("Failed to update the flashcard, try again!")
+            print(e)
 
     return render_template('update.html', flashcard=flashcard)
 
 #Deletes Flashcard
 @app.route("/flashcards/delete/<id>")
 def delete(id):
-    flashcard = Flashcard.query.get(id)
-    db.session.delete(flashcard)
-    db.session.commit()
-    return redirect("/flashcards")
+    try:
+        flashcard = Flashcard.query.get(id)
+        db.session.delete(flashcard)
+        db.session.commit()
+        return redirect("/flashcards")
+    except Exception as e:
+        print("Failed to delete the flashcard, try again!")
+        print(e)
 
 if __name__ == "__main__":
     app.debug = True
