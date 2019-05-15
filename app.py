@@ -20,7 +20,7 @@ def get(style):
     flashcards = Flashcard.query.all()
     print(flashcards)
     if len(flashcards) < 1:
-        flashcards = [Flashcard(term="Click me!", definition="There aren't any flashcards yet. Making some!")]
+        flashcards = [Flashcard(term="Click me!", definition="There aren't any flashcards yet. Make some!")]
     return render_template('show.html', data=flashcards)
 
 # Create new flashcard
