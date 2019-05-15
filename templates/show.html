@@ -1,21 +1,10 @@
-<!-- <link rel="stylesheet" href="/static/styles/card.css" type="text/css"> -->
+<link rel="stylesheet" href="/static/styles/card.css" type="text/css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 {% block body %}
-<!-- <ul>
-    {% for card in data %}
-    <li>
-        Term: {% print(card['term']) %}
-    </li>
-    <ul>
-        <li>
-            Definition: {% print(card['definition']) %}
-        </li>
-    </ul>
-    {% endfor %}
-</ul> -->
 {% for card in data %}
     <article class="flashcard">
-        <input type="checkbox" />
-        <label for="flashcard">
+        <input id="flashcard-{% print(card['flashcardID']) %}" type="checkbox" />
+        <label for="flashcard-{% print(card['flashcardID']) %}">
             <section class="front">
                 {% print(card['term']) %}
             </section>
@@ -24,9 +13,10 @@
                 {% print(card['definition']) %}
             </section>
         </label>
+        
+        <a class="nostyle" id="update" href="/flashcards/update/{% print(card['flashcardID']) %}"><i class="far fa-edit"></i></a>
+        <a class="nostyle" id="delete" href="/flashcards/delete/{% print(card['flashcardID']) %}"><i class="far fa-trash-alt"></i></a>
     </article>
-    <a href="/flashcards/update/{% print(card['flashcardID']) %}">Update</a>
-    <a href="/flashcards/delete/{% print(card['flashcardID']) %}">Delete</a>
     <br><br>
 {% endfor %}
 <a href="/flashcards/new">Create a new flashcard</a>
