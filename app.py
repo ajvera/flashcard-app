@@ -26,14 +26,21 @@ def get(style):
 @app.route("/flashcards/new", methods=["GET", "POST"])
 def new():
     if request.method == "POST":
+        print(request.form)
         try:
             flashcard = Flashcard(term=request.form['term'], definition=request.form['definition'])
             db.session.add(flashcard)
             db.session.commit()
-            return redirect('/')
+            redirect_url ='/flashcards'
+            if request.form.get('aural'):
+                redirect_url += "/aural"
+            return redirect(redirect_url)
         except Exception as e:
             print("Failed to make a new flashcard, try again!")
             print(e)
+
+    if "aural" in request.referrer:
+        return render_template('new.html', referrer=request.referrer)
     
     return render_template('new.html')
 
@@ -47,11 +54,17 @@ def update(id):
             flashcard.term = request.form.get('term')
             flashcard.definition = request.form.get('definition')
             db.session.commit()
-            return redirect('/flashcards')
+            redirect_url ='/flashcards'
+            if request.form.get('aural'):
+                redirect_url += "/aural"
+            return redirect(redirect_url)
         except Exception as e:
             print("Failed to update the flashcard, try again!")
             print(e)
 
+    if "aural" in request.referrer:
+        return render_template('update.html', flashcard=flashcard, referrer=request.referrer)
+    
     return render_template('update.html', flashcard=flashcard)
 
 # Deletes Flashcard
@@ -61,7 +74,10 @@ def delete(id):
         flashcard = Flashcard.query.get(id)
         db.session.delete(flashcard)
         db.session.commit()
-        return redirect("/flashcards")
+        redirect_url ='/flashcards'
+        if "aural" in request.referrer:
+            redirect_url += "/aural"
+        return redirect(redirect_url)
     except Exception as e:
         print("Failed to delete the flashcard, try again!")
         print(e)
