@@ -17,13 +17,18 @@
                     {% print(card['definition']) %}
                 </section>
             </label>
+            {% if card['flashcardID'] %}
+                <a class="nostyle" id="update" href="/flashcards/update/{% print(card['flashcardID']) %}"><i class="far fa-edit"></i></a>
+                <a class="nostyle" id="delete" href="/flashcards/delete/{% print(card['flashcardID']) %}"><i class="far fa-trash-alt"></i></a>
+            {% else %}
+                <a class="nostyle" id="update" href="/flashcards/new"><i class="far fa-edit"></i></a>
+            {% endif %}
             
-            <a class="nostyle" id="update" href="/flashcards/update/{% print(card['flashcardID']) %}"><i class="far fa-edit"></i></a>
-            <a class="nostyle" id="delete" href="/flashcards/delete/{% print(card['flashcardID']) %}"><i class="far fa-trash-alt"></i></a>
         </article>
         <br><br>
     {% endfor %}
     <a class="nostyle" id="new" href="/flashcards/new"><i class="far fa-plus-square"></i></a>
+    <a class="nostyle" id="home" href="/"><i class="far fa-arrow-alt-circle-left"></i></a>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/materialize/0.95.1/js/materialize.min.js"></script>
     <script src="/static/js/main.js"></script>

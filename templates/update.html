@@ -14,6 +14,9 @@
         <section class="definition">
            <textarea type="text" name="definition">{% print(flashcard['definition']) %}</textarea>
         </section>
+        {% if referrer %}
+            <input type="hidden" value="True" name="aural">
+        {% endif %}
         <input class="submit" type="submit" value="update">
     </form>
 </div>
