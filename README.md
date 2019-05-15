@@ -1,6 +1,8 @@
 # Flashcards for Differentiated Learning Styles
 
-A crud application for flashcard review that attempts to ingratiate itself to adherents of the [differentiated learning](https://education.cu-portland.edu/blog/classroom-resources/examples-of-differentiated-instruction/) philosophy.
+https://flashcard-learning-styles.herokuapp.com/
+
+A crud application for flashcard review that attempts to ingratiate itself to adherents of the [differentiated learning](https://education.cu-portland.edu/blog/classroom-resources/examples-of-differentiated-instruction/) philosophy. Allowing users to study their material in more ways than just the traditional read, write and rote memorization format.
 
 ## Hypothesis 
 Learners will enhance review session efficacy and knowledge retention if their natural learning style is engaged.
@@ -25,3 +27,4 @@ Provide users with the ability to customise flashcard review to a preffered lear
 * Poor cross browser compatibility. Some important styles break outside of chrome.
 * No unit testing
 * Error messages aren't being communicated to the user for failed POST actions 
+* Flashcards do not currently support images

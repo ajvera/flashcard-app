@@ -17,9 +17,13 @@
                     {% print(card['definition']) %}
                 </section>
             </label>
+            {% if card['flashcardID'] %}
+                <a class="nostyle" id="update" href="/flashcards/update/{% print(card['flashcardID']) %}"><i class="far fa-edit"></i></a>
+                <a class="nostyle" id="delete" href="/flashcards/delete/{% print(card['flashcardID']) %}"><i class="far fa-trash-alt"></i></a>
+            {% else %}
+                <a class="nostyle" id="update" href="/flashcards/new"><i class="far fa-edit"></i></a>
+            {% endif %}
             
-            <a class="nostyle" id="update" href="/flashcards/update/{% print(card['flashcardID']) %}"><i class="far fa-edit"></i></a>
-            <a class="nostyle" id="delete" href="/flashcards/delete/{% print(card['flashcardID']) %}"><i class="far fa-trash-alt"></i></a>
         </article>
         <br><br>
     {% endfor %}

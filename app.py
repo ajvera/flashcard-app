@@ -18,7 +18,6 @@ def index():
 @app.route("/flashcards/<style>")
 def get(style):
     flashcards = Flashcard.query.all()
-    print(flashcards)
     if len(flashcards) < 1:
         flashcards = [Flashcard(term="Click me!", definition="There aren't any flashcards yet. Make some!")]
     return render_template('show.html', data=flashcards)
@@ -68,6 +67,6 @@ def delete(id):
         print(e)
 
 if __name__ == "__main__":
-    # app.debug = True
+    app.debug = True
     app.run(host="0.0.0.0", port=8000)
 
