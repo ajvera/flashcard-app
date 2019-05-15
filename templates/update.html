@@ -1,4 +1,9 @@
-{% block body %}
+{% extends "layout.html" %}
+{% block title %}Update{% endblock %}
+{% block head %}
+    {{super() }}
+{% endblock %}
+{% block content %}
     <form action="/flashcards/update/{% print(flashcard['flashcardID']) %}" method="POST">
         <label for="term">Term</label>
         <input type="text" value="{% print(flashcard['term']) %}" name="term">

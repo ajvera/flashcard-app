@@ -1,2 +1,12 @@
-<h1>Welcome to Flashcards for Differentiated Learners</h1>
-<a href="/flashcards">Study!</a>
+{% extends "layout.html" %}
+{% block title %}Index{% endblock %}
+{% block head %}
+    {{super() }}
+    <link rel="stylesheet" href="/static/styles/index.css" type="text/css">
+{% endblock %}
+{% block content %}
+    <div class="welcome-mat">
+        <h1>Flashcards for Differentiated Learners</h1>
+        <a class="nostyle" id="study" href="/flashcards"><i class="far fa-play-circle"></i></a>
+    </div>
+{% endblock %}

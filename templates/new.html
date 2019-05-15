@@ -1,3 +1,9 @@
+{% extends "layout.html" %}
+{% block title %}New{% endblock %}
+{% block head %}
+    {{super() }}
+{% endblock %}
+{% block content %}
 <h1>Create a new flashcard</h1>
 <form action="/flashcards/new" method="post">
     <label for="term">Term</label>
@@ -7,3 +13,4 @@
     <input type="submit" value="create">
 </form>
 <a href="/flashcards">Review</a>
+{% endblock %}

@@ -1,23 +1,28 @@
-<link rel="stylesheet" href="/static/styles/card.css" type="text/css">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
-{% block body %}
-{% for card in data %}
-    <article class="flashcard">
-        <input id="flashcard-{% print(card['flashcardID']) %}" type="checkbox" />
-        <label for="flashcard-{% print(card['flashcardID']) %}">
-            <section class="front">
-                {% print(card['term']) %}
-            </section>
+{% extends "layout.html" %}
+{% block title %}Show{% endblock %}
+{% block head %}
+{{ super() }}
+    <link rel="stylesheet" href="/static/styles/show.css" type="text/css">
+{% endblock %}
+{% block content %}
+    {% for card in data %}
+        <article class="flashcard">
+            <input id="flashcard-{% print(card['flashcardID']) %}" type="checkbox" />
+            <label for="flashcard-{% print(card['flashcardID']) %}">
+                <section class="front">
+                    {% print(card['term']) %}
+                </section>
+                
+                <section class="back">
+                    {% print(card['definition']) %}
+                </section>
+            </label>
             
-            <section class="back">
-                {% print(card['definition']) %}
-            </section>
-        </label>
-        
-        <a class="nostyle" id="update" href="/flashcards/update/{% print(card['flashcardID']) %}"><i class="far fa-edit"></i></a>
-        <a class="nostyle" id="delete" href="/flashcards/delete/{% print(card['flashcardID']) %}"><i class="far fa-trash-alt"></i></a>
-    </article>
-    <br><br>
-{% endfor %}
-<a href="/flashcards/new">Create a new flashcard</a>
+            <a class="nostyle" id="update" href="/flashcards/update/{% print(card['flashcardID']) %}"><i class="far fa-edit"></i></a>
+            <a class="nostyle" id="delete" href="/flashcards/delete/{% print(card['flashcardID']) %}"><i class="far fa-trash-alt"></i></a>
+        </article>
+        <br><br>
+    {% endfor %}
+    <a class="nostyle" id="new" href="/flashcards/new"><i class="far fa-plus-square"></i></a>
+
 {% endblock %}
