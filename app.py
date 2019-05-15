@@ -13,7 +13,7 @@ from pprint import pprint
 def index():
     return render_template('index.html')
 
-#Flashcard review page
+# Flashcard review page
 @app.route("/flashcards")
 def get():
     flashcards = Flashcard.query.all()
@@ -22,7 +22,7 @@ def get():
         flashcards = [Flashcard(term="Click me!", definition="There aren't any flashcards yet. Making some!")]
     return render_template('show.html', data=flashcards)
 
-#Create new flashcard
+# Create new flashcard
 @app.route("/flashcards/new", methods=["GET", "POST"])
 def new():
     if request.method == "POST":
@@ -37,7 +37,7 @@ def new():
     
     return render_template('new.html')
 
-#Update an existing flashcard
+# Update an existing flashcard
 @app.route("/flashcards/update/<id>", methods=["GET","POST"])
 def update(id):
     flashcard = Flashcard.query.get(id)
@@ -54,7 +54,7 @@ def update(id):
 
     return render_template('update.html', flashcard=flashcard)
 
-#Deletes Flashcard
+# Deletes Flashcard
 @app.route("/flashcards/delete/<id>")
 def delete(id):
     try:
